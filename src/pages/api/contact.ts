@@ -29,13 +29,8 @@ const ContactSchema = zfd.formData({
 type Contact = z.infer<typeof ContactSchema>
 
 const sendEmail = async ({ fullName, email, phone, make, model, description }: Contact) => {
-  console.log('SENDING EMAIL...')
   const DOMAIN_NAME = import.meta.env.MAILGUN_DOMAIN_NAME
   const API_KEY = import.meta.env.MAILGUN_API_KEY
-  console.log({
-    DOMAIN_NAME,
-    API_KEY
-  })
   const response = await fetch(`https://api.mailgun.net/v3/${DOMAIN_NAME}.mailgun.org/messages`, {
     method: 'post',
     headers: {
@@ -55,7 +50,6 @@ const sendEmail = async ({ fullName, email, phone, make, model, description }: C
     })
   })
   if (!response.ok) {
-    console.log(await response)
     return false
   }
   return true
@@ -66,19 +60,8 @@ export const POST: APIRoute = async ({ request }) => {
   const safeParse = ContactSchema.safeParse(data)
   if (safeParse.success) {
     const success = await sendEmail(safeParse.data)
-    return new Response(
-      JSON.stringify({
-        message: 'Success!'
-      }),
-      { status: 200 }
-    )
+    return new Response(JSON.stringify({ message: 'Success!' }), { status: 200 })
   } else {
-    console.log('HERE')
-    return new Response(
-      JSON.stringify({
-        message: safeParse.error
-      }),
-      { status: 400 }
-    )
+    return new Response(JSON.stringify({ message: safeParse.error }), { status: 400 })
   }
 }

@@ -3,13 +3,12 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bunx --bun astro dev --port 3000",
-    "start": "bunx --bun astro dev",
-    "build": "bunx --bun run astro build"
+    "dev": "bun astro dev --port 3000",
+    "build": "bun run astro build"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
-    "@astrojs/cloudflare": "^8.1.0",
+    "@astrojs/netlify": "^5.0.0",
     "@astrojs/react": "^3.0.9",
     "@astrojs/tailwind": "^5.1.0",
     "@radix-ui/react-dialog": "^1.0.5",
