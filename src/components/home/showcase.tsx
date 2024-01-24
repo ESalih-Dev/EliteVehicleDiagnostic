@@ -20,7 +20,7 @@ export const Showcase = () => (
       </CarouselItem>
       <CarouselItem>
         <div className="relative">
-          <div className="flex flex-col font-semibold absolute max-w-[650px] space-y-6 md:space-y-10 left-10 xl:left-40 top-20 md:top-44 mr-8">
+          <div className="flex flex-col font-semibold absolute max-w-[650px] space-y-6 md:space-y-10 left-10 xl:left-40 top-28 md:top-44 mr-8">
             <span className="text-4xl md:text-6xl text-zinc-50 [text-shadow:_0_2px_1px_rgb(39,39,42)]">
               Need a yearly service?
             </span>
