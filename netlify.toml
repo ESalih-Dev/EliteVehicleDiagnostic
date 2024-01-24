@@ -1,2 +1,20 @@
 [build]
   command = "bun run build"
+
+[[redirects]]
+  from = "http://elitevehiclediagnostic.co.uk"
+  to = "https://elitevehiclediagnostic.co.uk"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.elitevehiclediagnostic.co.uk"
+  to = "https://elitevehiclediagnostic.co.uk"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.elitevehiclediagnostic.co.uk"
+  to = "https://elitevehiclediagnostic.co.uk"
+  status = 301
+  force = true
