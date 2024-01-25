@@ -1,6 +1,7 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
+import { Button } from '@/components/ui/button'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import {
   Command,
@@ -9,6 +10,7 @@ import {
   CommandInput,
   CommandItem
 } from '@/components/ui/command'
+import { useMediaQuery } from '@/lib/useMediaQuery'
 import { cn } from '@/lib/utils'
 
 export const MANUFACTURERS = [
@@ -82,12 +84,18 @@ export const MANUFACTURERS = [
 export const ManufacturerField = () => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<string>()
+  // Tailwind - md screen size
+  const isDesktop = useMediaQuery('(min-width: 768px)')
+
+  const Opener = isDesktop ? Popover : Drawer
+  const Trigger = isDesktop ? PopoverTrigger : DrawerTrigger
+  const Content = isDesktop ? PopoverContent : DrawerContent
 
   return (
     <>
       <input hidden name="make" value={value} />
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger asChild>
+      <Opener open={open} onOpenChange={setOpen}>
+        <Trigger asChild>
           <Button
             variant="outline"
             role="combobox"
@@ -96,12 +104,12 @@ export const ManufacturerField = () => {
             {value || 'Select manufacturer'}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
-        </PopoverTrigger>
-        <PopoverContent className="p-0">
+        </Trigger>
+        <Content className="p-0 max-h-[40vh] overflow-y-scroll">
           <Command>
             <CommandInput placeholder="Search..." />
             <CommandEmpty>Manufacturer not found, try "Other"</CommandEmpty>
-            <CommandGroup className="h-[300px] overflow-y-scroll">
+            <CommandGroup className="min-h-[300px] overflow-y-scroll">
               {MANUFACTURERS.map(manufacturer => (
                 <CommandItem
                   key={manufacturer}
@@ -121,8 +129,8 @@ export const ManufacturerField = () => {
               ))}
             </CommandGroup>
           </Command>
-        </PopoverContent>
-      </Popover>
+        </Content>
+      </Opener>
     </>
   )
 }

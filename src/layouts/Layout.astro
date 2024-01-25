@@ -3,15 +3,16 @@ import { Separator } from '@/components/ui/separator'
 import { Mail, Phone } from 'lucide-react'
 import { ToolbarMaps } from '@/components/home/toolbarMaps'
 import '@/styles/globals.css'
+import { cn } from '@/lib/utils'
 
 interface Props {
   title: string
 }
 
+const isHomepage = Astro.url.pathname === '/'
 const { title } = Astro.props
 ---
 
-<!doctype html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
@@ -23,25 +24,41 @@ const { title } = Astro.props
   </head>
   <body class="flex flex-col">
     <div
-      class="flex flex-col md:flex-row justify-between py-3 md:py-6 px-5 md:px-10 md:pr-0 bg-slate-200 text-slate-800 items-center">
-      <a href="/" class="text-3xl lg:text-5xl font-extralight mb-4 md:mb-0"
+      class="flex flex-col md:flex-row justify-between py-3 md:py-6 px-5 md:px-10 md:pr-0 bg-slate-50 text-slate-800 items-center">
+      <a href="/" class="text-3xl lg:text-4xl xl:text-5xl font-extralight mb-2 md:mb-0"
         >Elite Vehicle Diagnostic</a
       >
       <div class="flex flex-row">
+        {
+          isHomepage && (
+            <>
+              <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
+              <a
+                href="/contact"
+                class="flex flex-row sm:w-[180px] py-1 md:py-3 items-center justify-center">
+                <Mail className="h-6 w-6 md:h-8 md:w-8 sm:mr-3" />
+                <span class="font-semibold hidden sm:block">Contact form</span>
+              </a>
+            </>
+          )
+        }
         <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
-        <a href="/contact" class="flex flex-row sm:w-[180px] py-3 items-center justify-center">
-          <Mail className="h-5 w-5 md:h-8 md:w-8 sm:mr-3" />
-          <span class="font-mono font-semibold hidden sm:block">Contact form</span>
-        </a>
-        <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
+        {
+          isHomepage && (
+            <>
+              <ToolbarMaps client:load />
+              <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
+            </>
+          )
+        }
         <a
           href="tel:02081500022"
-          class="flex flex-row sm:w-[180px] py-3 items-center justify-center">
-          <Phone className="h-5 w-5 md:h-8 md:w-8 sm:mr-3" />
-          <span class="font-mono font-bold hidden sm:block">020 8150 0022</span>
+          class="flex flex-row sm:w-[180px] py-1 md:py-3 items-center justify-center">
+          <Phone className={cn('h-6 w-6 md:h-8 md:w-8', isHomepage ? 'sm:mr-3' : 'mr-3')} />
+          <span class={cn('font-mono font-bold', isHomepage && 'hidden sm:block')}
+            >020 8150 0022</span
+          >
         </a>
-        <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
-        <ToolbarMaps client:load />
         <Separator orientation="vertical" className="h-auto mx-4 lg:mx-8" />
       </div>
     </div>

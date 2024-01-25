@@ -1,8 +1,25 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import { Showcase } from '@/components/home/showcase'
+import { InformationCard } from '@/components/home/informationCard'
 ---
 
 <Layout title="Home | EliteVehicleDiagnostic">
-  <Showcase client:load />
+  <div class="space-y-32 mb-32">
+    <Showcase client:load />
+    <div class="container flex flex-col md:flex-row my-6 text-slate-100">
+      <InformationCard client:load />
+      <div class="flex flex-col justify-center w-full"></div>
+    </div>
+    <div class="container flex flex-col space-y-12 items-center">
+      <span class="font-bold text-3xl md:text-5xl text-slate-100">Find us on Google Maps</span>
+      <iframe
+        title="Location of Elite Vehicle Diagnostic Ltd"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9660.94248696149!2d-0.05449933225669937!3d51.64358414649973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761f70dfd30531%3A0xd0fb69287b12e81a!2sElite%20Vehicle%20Diagnostic%20Ltd!5e0!3m2!1sen!2suk!4v1663888595670!5m2!1sen!2suk"
+        height="600px"
+        width="100%"
+        loading="lazy"
+        style={{ border: 0, borderRadius: '1.5rem' }}></iframe>
+    </div>
+  </div>
 </Layout>

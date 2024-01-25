@@ -30,33 +30,33 @@ import { Button } from '@/components/ui/button'
     action="/api/contact"
     method="POST"
     enctype="application/x-www-form-urlencoded"
-    class="flex flex-col space-y-6 max-w-[600px] w-full mt-16 px-6 self-center">
+    class="flex flex-col space-y-6 md:space-y-8 max-w-[600px] w-full my-8 md:mt-16 px-6 self-center text-xl">
     <div class="flex flex-col sm:flex-row sm:items-center whitespace-nowrap">
       <label class="mb-2 sm:mr-4 sm:mb-0">Full name</label>
       <Input name="fullName" required minLength={3} maxLength={100} placeholder="John Smith" />
     </div>
-    <div class="flex space-y-4 sm:space-x-4 sm:space-y-0 flex-col sm:flex-row w-full">
+    <div class="flex space-y-6 sm:space-x-4 sm:space-y-0 flex-col sm:flex-row w-full">
       <div class="flex flex-col flex-grow-[2]">
-        <label class="ml-1 mb-2">Email</label>
+        <label class="ml-1 mb-4">Email</label>
         <Input name="email" required type="email" placeholder="johnsmith@gmail.com" />
       </div>
       <div class="flex flex-col flex-grow-1">
-        <label class="ml-1 mb-2">Phone <span class="text-zinc-500">(optional)</span></label>
+        <label class="ml-1 mb-4">Phone <span class="text-zinc-500">(optional)</span></label>
         <Input name="phone" type="tel" pattern="[+]{0,1}[0-9]{11,14}" placeholder="07912345678" />
       </div>
     </div>
-    <div class="flex space-y-4 sm:space-x-4 sm:space-y-0 flex-col sm:flex-row w-full">
+    <div class="flex space-y-6 sm:space-x-4 sm:space-y-0 flex-col sm:flex-row w-full">
       <div class="flex flex-col w-full">
-        <label class="ml-1 mb-2">Car make</label>
+        <label class="ml-1 mb-4">Car make</label>
         <ManufacturerField client:load />
       </div>
       <div class="flex flex-col w-full">
-        <label class="ml-1 mb-2">Car model <span class="text-zinc-500">(optional)</span></label>
+        <label class="ml-1 mb-4">Car model <span class="text-zinc-500">(optional)</span></label>
         <Input name="model" placeholder="e.g. 320d" />
       </div>
     </div>
     <div class="flex flex-col">
-      <label class="ml-1 mb-2">Description</label>
+      <label class="ml-1 mb-4">Description</label>
       <Textarea
         id="description"
         name="description"
@@ -64,8 +64,8 @@ import { Button } from '@/components/ui/button'
         maxLength={500}
         placeholder="Describe the problem here..."
       />
-      <span id="counter" class="mt-1 text-zinc-500 text-end">0</span>
+      <span id="counter" class="mt-1 text-zinc-500 text-end text-sm">0</span>
     </div>
-    <Button type="submit">Submit</Button>
+    <Button className="text-xl font-semibold" type="submit">Submit</Button>
   </form>
 </Layout>
