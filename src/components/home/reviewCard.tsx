@@ -78,22 +78,22 @@ export const ReviewCard = () => {
   const [hoveringReviewLink, setHoveringReviewLink] = useState(false)
 
   useEffect(() => {
-    setCurrentReview(getRandomReview(-1))
+    setCurrentReview(REVIEWS[4]) //getRandomReview(-1))
   }, [])
 
   return (
     <div
       ref={ref}
       className={cn(
-        'flex flex-col py-10 items-center border-2 bg-gradient-to-br from-lime-950 to-slate-900 border-slate-700 rounded-3xl transition-all duration-1000',
+        'flex flex-col py-8 items-center border-2 bg-gradient-to-br from-lime-950 to-slate-900 border-slate-700 rounded-3xl transition-all duration-1000',
         isVisible ? 'opacity-100' : 'opacity-0 translate-y-20'
       )}>
-      <div className="mb-4">
-        <Quote className="rotate-180 mr-auto ml-4" />
-        <div className="px-6 my-4 text-xl text-ellipsis">{currentReview.body}</div>
-        <Quote className="ml-auto mr-4" />
+      <Quote className="rotate-180 ml-4 mr-auto mb-2" />
+      <div className="flex items-center flex-grow-[10] px-6 text-xl text-ellipsis">
+        {currentReview.body}
       </div>
-      <div className="flex flex-row justify-between w-full mt-auto px-2 items-center">
+      <Quote className="ml-auto mt-2 mr-4" />
+      <div className="flex flex-row justify-between w-full mt-8 px-2 items-center">
         <a
           href={currentReview.source}
           target="_blank"
