@@ -109,7 +109,7 @@ export const ManufacturerField = () => {
           <Command>
             <CommandInput placeholder="Search..." />
             <CommandEmpty>Manufacturer not found, try "Other"</CommandEmpty>
-            <CommandGroup className="min-h-[300px] overflow-y-scroll">
+            <CommandGroup className="min-h-[300px]">
               {MANUFACTURERS.map(manufacturer => (
                 <CommandItem
                   key={manufacturer}

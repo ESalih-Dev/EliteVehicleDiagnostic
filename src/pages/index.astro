@@ -2,14 +2,16 @@
 import Layout from '@/layouts/Layout.astro'
 import { Showcase } from '@/components/home/showcase'
 import { InformationCard } from '@/components/home/informationCard'
+import { ReviewCard } from '@/components/home/reviewCard'
 ---
 
 <Layout title="Home | EliteVehicleDiagnostic">
   <div class="space-y-32 mb-32">
     <Showcase client:load />
-    <div class="container flex flex-col md:flex-row my-6 text-slate-100">
+    <div
+      class="container flex flex-col md:flex-row my-6 space-y-6 md:space-y-0 md:space-x-4 text-slate-100 justify-between lg:h-[500px] *:flex *:w-full">
       <InformationCard client:load />
-      <div class="flex flex-col justify-center w-full"></div>
+      <ReviewCard client:load />
     </div>
     <div class="container flex flex-col space-y-12 items-center">
       <span class="font-bold text-3xl md:text-5xl text-slate-100">Find us on Google Maps</span>
@@ -19,7 +21,7 @@ import { InformationCard } from '@/components/home/informationCard'
         height="600px"
         width="100%"
         loading="lazy"
-        style={{ border: 0, borderRadius: '1.5rem' }}></iframe>
+        style={{ borderRadius: '1.5rem' }}></iframe>
     </div>
   </div>
 </Layout>

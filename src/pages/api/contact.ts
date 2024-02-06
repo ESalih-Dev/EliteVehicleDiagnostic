@@ -1,7 +1,13 @@
 import type { APIRoute } from 'astro'
 import { z } from 'zod'
 import { zfd } from 'zod-form-data'
+import { fromZodError } from 'zod-validation-error'
 import { MANUFACTURERS } from '@/components/contact/manufacturerField'
+
+const SUCCESS_MSG =
+  'Your message has been received! We endeavour to get back to all requests within 48 hours.'
+const FAILED_MSG =
+  "Oops! Something's gone wrong on our end 😞 we're looking into the issue, but in the meantime we recommend you call us on 020 8150 0022"
 
 const ContactSchema = zfd.formData({
   fullName: z
@@ -22,7 +28,8 @@ const ContactSchema = zfd.formData({
       message: 'Please go into a bit more detail than that :)'
     })
     .max(500, {
-      message: 'Looks like the '
+      message:
+        'Please just provide us with an overview - if you need to give more detail we recommend calling.'
     })
 })
 
@@ -50,6 +57,7 @@ const sendEmail = async ({ fullName, email, phone, make, model, description }: C
     })
   })
   if (!response.ok) {
+    console.error(await response.body)
     return false
   }
   return true
@@ -60,8 +68,17 @@ export const POST: APIRoute = async ({ request }) => {
   const safeParse = ContactSchema.safeParse(data)
   if (safeParse.success) {
     const success = await sendEmail(safeParse.data)
-    return new Response(JSON.stringify({ message: 'Success!' }), { status: 200 })
+    if (success) {
+      return new Response(JSON.stringify({ success: true, message: SUCCESS_MSG }), { status: 200 })
+    } else {
+      return new Response(JSON.stringify({ success: false, message: FAILED_MSG }), { status: 422 })
+    }
   } else {
-    return new Response(JSON.stringify({ message: safeParse.error }), { status: 400 })
+    return new Response(
+      JSON.stringify({ success: false, message: fromZodError(safeParse.error).toString() }),
+      {
+        status: 422
+      }
+    )
   }
 }
